@@ -1,11 +1,4 @@
-#[cfg(feature = "arch")]
 pub use satellite_lang::prelude::*;
-#[cfg(not(feature = "arch"))]
-pub use anchor_lang::prelude::*;
-
-#[cfg(not(feature = "arch"))]
-declare_id!("2GLer8rCEPs2RQ8vuvediG6Dj9DrSvub4HmGng4L5YcB");
-#[cfg(feature = "arch")]
 declare_id!("86ecdec70fd08e7e664d3f527a2fe07ae913cc9a6db5909bd5daf40978250282");
 
 #[program]

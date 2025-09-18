@@ -4,10 +4,9 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-arch_program = { version = "0.5.5"}
-arch_sdk = { version = "0.5.5"}
-# arch_test_sdk = "0.5.2"
-# borsh = { version = "^0.10.3"}
+# arch_program = { git = "https://github.com/SaturnBTC/satellite.git", branch = "satellite", package = "arch_program" }
+arch_program = { version = "0.5.11" }
+arch_sdk = { version = "0.5.11" }
 borsh = { version = "1.4.0" }
 tokio = { version = "1.0", features = ["full"] }
 proptest = "1.0"

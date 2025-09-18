@@ -20,9 +20,9 @@ impl TestEnvironment {
         let bitcoin_network = test_config.network;
         let node1_address = &test_config.arch_node_url;
 
-        let client = ArchRpcClient::new(node1_address);
+        let client = ArchRpcClient::new(&test_config);
 
-        let (program_keypair, _, _) = generate_new_keypair(bitcoin_network);
+        let (program_keypair, program_pubkey, _) = generate_new_keypair(bitcoin_network);
         let (program_keypair_from_file, program_pubkey_from_file) =
             with_secret_key_file(&TestEnvironment::PROGRAM_KEYPAIR_PATH.to_string()).expect("getting caller info should not fail");
 
@@ -31,11 +31,22 @@ impl TestEnvironment {
         let (signer_keypair, signer_pubkey, _) = generate_new_keypair(bitcoin_network);
 
         let _res = client
-            .create_and_fund_account_with_faucet(&signer_keypair, bitcoin_network).unwrap()
+            .create_and_fund_account_with_faucet(&signer_keypair).unwrap()
             ;
 
-        let deployer = ProgramDeployer::new(node1_address, bitcoin_network);
+        let deployer = ProgramDeployer::new(&test_config);
+        let program_account_info = client.read_account_info(program_pubkey);
+        match program_account_info {
+            Ok(_) => {
+                println!("Program account already exists: {}", program_pubkey.to_string());
+            }
+            Err(err) => {
+                println!("Program account not found");
+                println!("Error: {}", err);
+            }
+        }
 
+        // println!("test_config: {:?}", test_config);
         let program_pubkey = deployer
             .try_deploy_program(
                 "Test Program".to_string(),
@@ -60,7 +71,7 @@ impl TestEnvironment {
         let bitcoin_network = test_config.network;
         let node1_address = &test_config.arch_node_url;
 
-        let client = ArchRpcClient::new(node1_address);
+        let client = ArchRpcClient::new(&test_config);
 
         let (program_keypair, program_pubkey) =
             with_secret_key_file(&TestEnvironment::PROGRAM_KEYPAIR_PATH.to_string()).expect("getting caller info should not fail");
@@ -69,7 +80,7 @@ impl TestEnvironment {
 
 
         let _res = client
-            .create_and_fund_account_with_faucet(&signer_keypair, bitcoin_network).unwrap()
+            .create_and_fund_account_with_faucet(&signer_keypair).unwrap()
             ;
 
         println!("Using program pubkey: {}", program_pubkey.to_string());
@@ -77,7 +88,7 @@ impl TestEnvironment {
         let program_account_info = client
         .read_account_info(program_pubkey).unwrap_or_else(|_| {
             println!("Program account not found, deploying program...");
-            let deployer = ProgramDeployer::new(node1_address, bitcoin_network);
+            let deployer = ProgramDeployer::new(&test_config);
 
             let program_pubkey = deployer
                 .try_deploy_program(

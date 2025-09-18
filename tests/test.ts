@@ -11,6 +11,12 @@ describe("test", () => {
   it("Is initialized!", async () => {
     // Add your test here.
     const tx = await program.methods.initialize().rpc();
+    const [configAddr] = anchor.web3.PublicKey.findProgramAddressSync(
+      [Buffer.from("config")],
+      program.programId
+    );
+    const config = await program.account.programConfig.fetch(configAddr);
     console.log("Your transaction signature", tx);
+    console.log("Your config account", config);
   });
 });
