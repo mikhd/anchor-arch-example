@@ -14,12 +14,12 @@ cpi = ["no-entrypoint"]
 no-entrypoint = []
 no-idl = []
 no-log-ix-name = []
-idl-build = ["anchor-lang/idl-build"]
+idl-build = ["anchor-lang/idl-build", "satellite-lang/idl-build"]
 
 [dependencies]
 anchor-lang = { version = "0.31.1" }
-arch_program = { version = "0.5.11" }
+arch_program = { version = "0.5.12" }
 # satellite-lang = { git = "https://github.com/SaturnBTC/satellite.git", branch = "satellite", package = "satellite-lang", optional = true }
 # satellite-lang = { git = "ssh://git@github.com/SaturnBTC/whirlpools.git", branch = "main", package = "satellite-lang", optional = true }
-satellite-lang = { version = "0.31.1" }
+satellite-lang = { version = "0.31.2" }
 

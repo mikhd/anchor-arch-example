@@ -265,9 +265,9 @@ dependencies = [
 
 [[package]]
 name = "arch_program"
-version = "0.5.11"
+version = "0.5.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "365e8b10dfd87fe2ff8693bf581e323b81a1cd3f3a35fd84b7f31966b6509be5"
+checksum = "8a9243ac5a2f41986c47f75be4b5adace60710880acc96203e1c757066e9b15a"
 dependencies = [
  "bincode",
  "bitcode",
@@ -2637,6 +2637,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "satellite-attribute-event"
+version = "0.31.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "374b7b8cd9d588d11ab87afc8d40a5fd292fe65e50b196c7b6c6354787016d33"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "satellite-syn",
+ "syn 1.0.109",
+]
+
+[[package]]
 name = "satellite-attribute-program"
 version = "0.31.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2690,9 +2702,9 @@ dependencies = [
 
 [[package]]
 name = "satellite-lang"
-version = "0.31.1"
+version = "0.31.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "99fd075c4df6cc2ddd90b16d724f77508f7b42706c66b09496af39988e3fede6"
+checksum = "c7342f2a4107c7b7970234a0d9464cf240031852352dd18ba91859355f3989b7"
 dependencies = [
  "arch_program",
  "base64 0.21.7",
@@ -2703,10 +2715,12 @@ dependencies = [
  "satellite-attribute-account",
  "satellite-attribute-constant",
  "satellite-attribute-error",
+ "satellite-attribute-event",
  "satellite-attribute-program",
  "satellite-derive-accounts",
  "satellite-derive-serde",
  "satellite-derive-space",
+ "satellite-lang-idl",
  "thiserror 1.0.69",
 ]
 
@@ -2718,6 +2732,7 @@ checksum = "9c5002d8bb3014f4e284b44ca856a28de27dea6150d394076c4012ac3b4af7e3"
 dependencies = [
  "anyhow",
  "heck 0.3.3",
+ "regex",
  "satellite-lang-idl-spec",
  "serde",
  "serde_json",
@@ -2736,11 +2751,12 @@ dependencies = [
 
 [[package]]
 name = "satellite-syn"
-version = "0.31.1"
+version = "0.31.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "714f2cd1e50a6708e8eafd94e9e9f39d10fdfb8805aca1a9dedc08d40a2fdea2"
+checksum = "68e099039d91779d64b778bb55479efbef4c641900814a37ba3c26a0654f670e"
 dependencies = [
  "anyhow",
+ "cargo_toml",
  "heck 0.3.3",
  "hex",
  "proc-macro2",

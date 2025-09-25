@@ -10,6 +10,10 @@ pub mod test {
         let config = &mut ctx.accounts.config;
         config.version = 1;
         config.bump = ctx.bumps.config;
+
+        emit!(ProgramInitialized {
+            version: config.version,
+        });
         Ok(())
     }
 }
@@ -39,4 +43,9 @@ pub struct ProgramConfig {
 
 impl ProgramConfig {
     pub const LEN: usize = 8 + ProgramConfig::INIT_SPACE;
+}
+
+#[event]
+pub struct ProgramInitialized {
+    pub version: u16,
 }
